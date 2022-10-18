@@ -3,7 +3,7 @@
 
 //create express app
 const exp = require("express");
-const app = exp();;
+const app = exp();
 
 
 
@@ -13,29 +13,9 @@ const path=require('path');
 //connect build of react app with nodejs
 app.use(exp.static(path.join(__dirname,'./build')))
 
+const userApi=require("./APIS/userApi")
+app.use('/user',userApi);
 
-
-const { 
-        createPool
-    }=require('mysql');
-    const { stringify } = require("querystring");
-    const pool =createPool({
-        host:"localhost",
-        user:"root",
-        password:"root",
-        database:"dbshackathon",
-        timezone: 'Z',
-        connectionLimit:1
-    
-    })
-
-
-    pool.query('select * from traindetails',(err,result,fields)=>{
-        if(err){
-            return console.log(err);
-        }
-     console.log({result})
-    })
 
 
 //dealing with page refresh
