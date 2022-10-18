@@ -15,13 +15,18 @@ const pool =createPool({
 
 })
 
-
-pool.query('select * from traindetails',(err,result,fields)=>{
-    if(err){
-        return console.log(err);
-    }
- console.log({result})
+userApi.get('/gettraindetails',(req,res)=>{
+    pool.query('select * from traindetails',(err,result,fields)=>{
+        if(err){
+            return console.log(err);
+        }
+     console.log({result})
+    })
+    res.send({message:result})
 })
+
+
+
 
 
 module.exports=userApi;
