@@ -5,6 +5,7 @@ const {
     createPool
 }=require('mysql');
 const { stringify } = require("querystring");
+const { pathToFileURL } = require("url");
 const pool =createPool({
     host:"localhost",
     user:"root",
@@ -25,7 +26,18 @@ userApi.get('/gettraindetails',(req,res)=>{
     res.send({message:result})
 })
 
+userApi.post('/gettraindetailsforuser',(req,res)=>{
+    let obj=req.body;
 
+
+    pool.query('select * from traindetails where source=? and destination=? '),[req.body.s,req.body.d],(err,results,fields)=>{
+        if(err){
+            return console.log(err);
+        }
+     console.log({result})
+    };
+    res.send({message:result})
+})
 
 
 
